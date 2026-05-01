@@ -53,16 +53,16 @@ Raw dataset source: [Superstore Sales Dataset](https://www.kaggle.com/datasets/r
 
 ## Dashboard Pages
 ### Executive Overview
-![Executive Overview](executive_overview.png)
+![Executive Overview](https://github.com/juanmdevo/end-to-end-retail-etl-pipeline/blob/main/dashboard/executive_overview.png)
 
 ### Product Performance
-![Product Performance](product_performance.png)
+![Product Performance](https://github.com/juanmdevo/end-to-end-retail-etl-pipeline/blob/main/dashboard/product_performance.png)
 
 ### Regional Analysis
-![Regional Analysis](regional_analysis.png)
+![Regional Analysis](https://github.com/juanmdevo/end-to-end-retail-etl-pipeline/blob/main/dashboard/regional_analysis.png)
 
 ### Customer Analysis
-![Customer Analysis](customer_analysis.png)
+![Customer Analysis](https://github.com/juanmdevo/end-to-end-retail-etl-pipeline/blob/main/dashboard/customer_analysis.png)
 
 ## Project Architecture
 train.csv -> Python + Pandas Cleaning -> cleaned_superstore.csv -> stg_superstore_raw -> dim_customers dim_products dim_locations dim_dates fact_sales -> Power BI Dashboard
