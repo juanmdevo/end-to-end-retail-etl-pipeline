@@ -1,0 +1,64 @@
+import pandas as pd
+
+# Load the raw retail sales dataset
+df = pd.read_csv('/content/train.csv')
+
+# Display the first 5 rows
+df.head()
+
+# Check columns names, data types and missing values
+df.info()
+
+# Count missing values in each column
+df.isnull().sum()
+
+# Check for duplicate rows
+df.duplicated().sum()
+
+# Standarize column names to snake_case
+df.columns = df.columns.str.lower().str.replace(' ', '_').str.replace('-', '_')
+
+# Convert date columns to datetime format
+df['order_date'] = pd.to_datetime(df['order_date'], dayfirst=True)
+df['ship_date'] = pd.to_datetime(df['ship_date'], dayfirst=True)
+
+#Create a new column for shipping time in days
+df['shipping_days'] = (df['ship_date'] - df['order_date']).dt.days
+
+# Create date keys in YYYYMMDD format
+df['order_date_key'] = df['order_date'].dt.strftime('%Y%m%d').astype(int)
+df['ship_date_key'] = df['ship_date'].dt.strftime('%Y%m%d').astype(int)
+
+# Replace missing postal codes with 0
+df['postal_code'] = df['postal_code'].fillna(0)
+
+# Convert postal code to integer
+df['postal_code'] = df['postal_code'].astype(int)
+
+# Create a sales category on transaction amount
+df['sales_category'] = df['sales'].apply(
+    lambda x: 'Low' if x < 100 else 'Medium' if x < 500 else 'High'
+)
+
+# Extract year and month from order date for reporting
+df['order_year'] = df['order_date'].dt.year
+df['order_month'] = df['order_date'].dt.month
+df['order_month_name'] = df['order_date'].dt.month_name()
+
+# Display the first 5 rows of the cleaned dataset
+df.head()
+df.info()
+
+# Revie summary statistics for numeric columns
+df.describe()
+
+# Export cleaned dataset to CSV
+df.to_csv('/content/cleaned_superstore.csv', index=False)
+
+
+# Export cleaned dataset with safe quoting
+df.to_csv('/content/cleaned_superstore.csv', index=False, encoding='utf-8')
+
+from google.colab import files
+
+files.download('/content/cleaned_superstore.csv')
